@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+Route::get('/rooms', function () {
+    return view('rooms.index');
+});
+
+Route::get('/rooms-single', function () {
+    return view('rooms.show');
 });
 
 Auth::routes();
