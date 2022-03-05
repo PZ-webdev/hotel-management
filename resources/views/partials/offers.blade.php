@@ -2,8 +2,8 @@
     <div class="container">
             <div class="row justify-content-start mb-5 pb-3">
         <div class="col-md-7 heading-section ftco-animate">
-            <span class="subheading">Special Offers</span>
-        <h2 class="mb-4"><strong>Popular</strong> Hotels &amp; Rooms</h2>
+            <span class="subheading">Oferta Spejalna</span>
+        <h2 class="mb-4"><strong>Najpopularniejsze</strong> Pokoje</h2>
         </div>
     </div>    		
     </div>

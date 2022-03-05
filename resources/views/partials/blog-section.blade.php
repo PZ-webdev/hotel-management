@@ -2,8 +2,8 @@
     <div class="container">
     <div class="row justify-content-start mb-5 pb-3">
         <div class="col-md-7 heading-section ftco-animate">
-        <span class="subheading">Recent Blog</span>
-        <h2><strong>Tips</strong> &amp; Articles</h2>
+        <span class="subheading">Ostetnie wpisy</span>
+        <h2><strong>Porady</strong> i Artykuły</h2>
         </div>
     </div>
     <div class="row d-flex">
