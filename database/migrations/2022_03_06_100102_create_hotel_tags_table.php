@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('hotel_tags', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_room');
-            $table->integer('id_tags');
+            $table->unsignedBigInteger('id_room');
+            $table->foreign('id_room')->references('id')->on('rooms');
+            $table->unsignedBigInteger('id_tags');
+            $table->foreign('id_tags')->references('id')->on('tags');
             $table->timestamps();
         });
     }

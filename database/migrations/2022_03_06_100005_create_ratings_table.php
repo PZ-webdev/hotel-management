@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_room');
+            $table->unsignedBigInteger('id_room');
+            $table->foreign('id_room')->references('id')->on('rooms');
             $table->integer('rating');
             $table->timestamps();
         });

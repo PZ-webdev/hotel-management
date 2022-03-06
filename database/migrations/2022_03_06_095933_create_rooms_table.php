@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->text('description');
-            $table->integer('room_type');
+            $table->unsignedBigInteger('room_type');
+            $table->foreign('room_type')->references('id')->on('room_types');
             $table->double('room_fee');
             $table->string('image');
             $table->boolean('is_empty')->default(false);
