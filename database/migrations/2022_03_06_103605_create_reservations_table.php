@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('phone');
+            $table->date('date_start');
+            $table->date('date_end');
             $table->timestamps();
         });
     }
