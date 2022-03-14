@@ -43,19 +43,19 @@ class ReservationRequest extends FormRequest
     public function messages()
     {
         return [
-            'first_name.required' => 'Firstname is required',
-            'last_name.required' => 'Lastname is required',
-            'email.required' => 'E-mail is required',
-            'email.email' => 'E-mail is not valid address email',
-            'address.required' => 'Address is required',
-            'city.required' => 'City is required',
-            'phone.required' => 'Phone is required',
-            'date_in.required' => 'Date in is required',
-            'date_in.date' => 'Date in invalid format',
-            'date_in.after' => 'Date in must by after today',
-            'date_off.required' => 'Date in is required',
-            'date_off.date' => 'Date off invalid format',
-            'date_off.after_or_equal' => 'Date off must be after date in',
+            'first_name.required' => 'Pole Imię jest wymagane',
+            'last_name.required' => 'Pole Nazwisko jest wymagane',
+            'email.required' => 'Pole E-mail jest wymagane',
+            'email.email' => 'Niepoprawny adres e-mail',
+            'address.required' => 'Pole Adres jest wymagane',
+            'city.required' => 'Pole Miastio jest wymagane',
+            'phone.required' => 'Pole Telefon jest wymagane',
+            'date_in.required' => 'Data dozpoczęcia jest wymagana',
+            'date_in.date' => 'Niepoprawny format daty',
+            'date_in.after' => 'Wprowadzona data musi być większa od dzisiejszej daty',
+            'date_off.required' => 'Date zakończenia jest wymagana',
+            'date_off.date' => 'Niepoprawny format daty',
+            'date_off.after_or_equal' => 'Data zakończenia musi być poźniejsza od daty rozpoczęcia',
         ];
     }
 }
