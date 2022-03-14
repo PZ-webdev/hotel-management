@@ -19,12 +19,14 @@ return new class extends Migration
             $table->foreign('id_room')->references('id')->on('rooms');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('phone');
             $table->date('date_start');
             $table->date('date_end');
+            $table->integer('confirm_code');
+            $table->timestamp('verified_at')->nullable();
             $table->timestamps();
         });
     }
