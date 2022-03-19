@@ -19,7 +19,7 @@ class RatingFactory extends Factory
     {
         return [
             'id_room' => rand(1, Room::count()),
-            'rating'  => rand(1,5),
+            'rating'  => rand(3, 5),
         ];
     }
 }

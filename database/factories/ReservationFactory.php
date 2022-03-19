@@ -27,6 +27,7 @@ class ReservationFactory extends Factory
             'phone' => $this->faker->phoneNumber(), 
             'date_start' => $this->faker->dateTimeInInterval('-1 week', 'now'),
             'date_end' => $this->faker->dateTimeInInterval('now', '+1 week'),
+            'confirm_code' => $this->faker->unixTime(),
         ];
     }
 }

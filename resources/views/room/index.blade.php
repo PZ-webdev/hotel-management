@@ -92,12 +92,13 @@
                                     <div class="one">
                                         <h3><a href="{{route('room.show', $room->slug)}}">{{$room->name}}</a></h3>
                                         <p class="rate">
-                                            @for ($i = 0; $i <= 5; $i++) @if ($i <=(int)$room->rating_avg)
-                                                <i class="icon-star"></i>
+                                            @for ($i = 0; $i <= 5; $i++) 
+                                                @if ($i <=(int)$room->rating_avg)
+                                                    <i class="icon-star"></i>
                                                 @else
-                                                <i class="icon-star-o"></i>
+                                                    <i class="icon-star-o"></i>
                                                 @endif
-                                                @endfor
+                                            @endfor
                                                 <span>{{$room->count_rating}} Ocen</span>
                                         </p>
                                     </div>

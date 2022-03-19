@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
 <body>
+    @include('sweetalert::alert')
     <div id="app">
        <main>
             @yield('content')

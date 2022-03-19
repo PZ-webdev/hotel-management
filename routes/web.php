@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,18 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [IndexController::class, 'index'])->name('index');
 
-Route::get('/rooms', function () {
-    return view('rooms.index');
-});
-
-Route::get('/rooms-single', function () {
-    return view('rooms.show');
-});
+Route::resource('room', RoomController::class)->scoped(['room' => 'slug'])->only('index', 'show');
+Route::resource('reservation', ReservationController::class)->only('store');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');

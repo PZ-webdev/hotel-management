@@ -29,7 +29,7 @@ class Room extends Model
 
     public function isEmpty($room): bool
     {
-        $date_end = $this->reservation($room)->date_end;
+        $date_end = $this->reservation($room)->date_end ?? null;
         if($date_end > now()){
             return true;
         }else{

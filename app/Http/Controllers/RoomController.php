@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
 {
@@ -11,9 +14,23 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+       
+        $rooms = DB::table('ratings AS r')
+            ->select([
+                'rooms.*',
+                DB::raw('COUNT(*) AS count_rating'),
+                DB::raw('AVG(r.rating) AS rating_avg')
+            ])
+            ->join('rooms', 'rooms.id', '=', 'r.id_room')
+            ->orderBy('rating_avg', 'DESC')
+            ->groupBy('id_room')
+            ->paginate(9);
+
+        $roomTypes = RoomType::all();
+
+        return view('room.index', compact('rooms', 'roomTypes'));
     }
 
     /**
@@ -43,9 +60,9 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Room $room)
     {
-        //
+        return view('room.show', compact('room'));
     }
 
     /**
@@ -81,4 +98,10 @@ class RoomController extends Controller
     {
         //
     }
+
+    private function filtr($request)
+    {
+        //   
+    }
+
 }

@@ -2601,7 +2601,7 @@ select.form-control-lg:not([size]):not([multiple]),
 .form-control.is-invalid,
 .was-validated .custom-select:invalid,
 .custom-select.is-invalid {
-    border-color: #dc3545;
+    border-color: #dc3545!important;
 }
 
 .was-validated .form-control:invalid:focus,
@@ -11164,12 +11164,12 @@ h5,
 }
 
 .destination .text .rate i {
-    font-size: 10px;
+    font-size: 12px;
     color: #f85959;
 }
 
 .destination .text .rate span {
-    padding-left: 5px;
+    padding-left: 3px;
     font-size: 10px;
 }
 
@@ -13206,7 +13206,7 @@ textarea.form-control {
 
 .rate i {
     color: #f85959;
-    margin: 0 4px;
+    margin: 0 1px;
 }
 
 .sidebar-box {
