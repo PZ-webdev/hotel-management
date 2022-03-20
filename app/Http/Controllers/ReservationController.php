@@ -59,6 +59,7 @@ class ReservationController extends Controller
             $reservation->confirm_code = time(); 
             $reservation->save();
             
+            //TODO: change to email on email->request;
             Mail::to('patryk.zaprzala@gmail.com')->send(new ConfirmReservation($reservation));
             alert()->success('Udało się !','Potwierdzenie rezerwacji zostało wysłane na podany adres e-mail');
         }
@@ -108,5 +109,33 @@ class ReservationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+     /**
+     * Confirm reservation no auth user.
+     *
+     * @param  int  $id
+     * @param  string  $hash
+     * @return \Illuminate\Http\Response
+     */
+    public function confirm($id, $hash)
+    {
+        $reservation = Reservation::find($id);
+    
+        if($reservation->verified_at == null){
+            $hashCode = hash('sha512', $reservation->confirm_code);
+            if($hash == $hashCode){
+                $reservation->verified_at = now();
+                $reservation->save();
+
+                alert()->success('Udało się !','Twoja rezerwacja została potwierdzona. Do zobaczenia !');
+            }else{
+                alert()->error('Wystąpił Błąd','Niepoprawny odnośnik potwierdzający rezerwację.');
+            }
+        }else{
+            alert()->info('Informacja','Twoja rezerwacja została potwierdzona, dnia: ' . $reservation->verified_at);
+        }
+
+        return redirect()->route('room.index');
     }
 }

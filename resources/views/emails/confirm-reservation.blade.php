@@ -5,7 +5,7 @@ Drogi {{$email->first_name}}  {{$email->last_name}},
 
 W celu potwierdzenia rezerwacji, kliknij w poniższy przycisk: 
 
-@component('mail::button', ['url' => route('index'), 'color' => 'success'])
+@component('mail::button', ['url' => route('reservation.confirm', ['hash' => hash('sha512',$email->confirm_code), 'id' => $email->id]), 'color' => 'success'])
     Potwierdź
 @endcomponent
 

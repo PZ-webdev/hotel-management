@@ -21,8 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
 Route::resource('room', RoomController::class)->scoped(['room' => 'slug'])->only('index', 'show');
-Route::resource('reservation', ReservationController::class)->only('store');
+
+Route::resource('reservation', ReservationController::class)->only('store', 'show');
+
+Route::get('reservation/confirm/{id}/{hash}', [ReservationController::class, 'confirm'])->name('reservation.confirm');
+
 
 Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
