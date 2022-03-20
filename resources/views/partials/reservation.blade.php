@@ -1,48 +1,41 @@
-<div class="hero-wrap js-fullheight" style="background-image: url('images/bg_2.jpg');">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
-        <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-          <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/">Start</a></span> <span>Home</span></p>
-          <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Rezerwacje</h1>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="hero-wrap" style="background-image: url('images/destination-5.jpg'); height:250px;"></div>
 
     <section class="ftco-section contact-section ftco-degree-bg">
-    <div class="container">
-      <div class="row d-flex mb-5 contact-info">
-        <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-      </div>
-    </div>
+      <div class="container">
+            @if ($reservations->isEmpty())
+                <span class="text-center"><h3>Brak rezerwacji</h3></span>
+            @else         
+                <h3 class="mb-3">Twoje Rezerwację</h3>
+                <div class="row d-flex mb-5 contact-info">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Pokój</th>
+                            <th scope="col">Data Rozpoczęcia</th>
+                            <th scope="col">Data Zakończenia</th>
+                            <th scope="col">Suma dni</th>
+                            <th scope="col">Opłata</th>
+                            <th>Szczegóły</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($reservations as $reservation)
+                                <tr>
+                                    <th scope="row">{{$loop->iteration}}</th>
+                                    <td>
+                                        <a href="#" class="text-link">[{{$reservation->id_room}}]</a> - Nazwa pokoju
+                                    </td>
+                                    <td>{{$reservation->date_start}}</td>
+                                    <td>{{$reservation->date_end}}</td>
+                                    <td>12</td>
+                                    <td>6734zł</td>
+                                    <td><button class="btn btn-sm btn-info button-info"><i class="icon-info-circle"></i></button></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
   </section>

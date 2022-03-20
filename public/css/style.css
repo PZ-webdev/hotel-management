@@ -13373,3 +13373,11 @@ textarea.form-control {
         stroke-dashoffset: -136px;
     }
 }
+
+/* Custom Styles */
+
+.button-info{
+    height: 50%;
+    width:50%;
+    font-size:18px;
+}

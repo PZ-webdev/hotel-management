@@ -43,6 +43,9 @@
                     </div>
                     <div class="col-md-12 hotel-single mt-2 mb-5 ftco-animate">
                         <h2>{{$room->name}}</h2>
+                            @if ($room->isEmpty($room))
+                                <span class="text-danger text-bold">Pokoj obecnie jest w trakcie rezerwacji</span>
+                            @endif
                         <p class="rate mb-5">
                             <span class="loc"><a href="#">
                                 <i class="icon-map"></i> [TAGI POKOJU]</a>
@@ -54,11 +57,7 @@
                                 <i class="icon-star"></i>
                                 <i class="icon-star-o"></i>
                                 8 Rating</span>
-                            <span>
-                                @if ($room->isEmpty($room))
-                                    pokoj jest w trakcie rezerwacji
-                                @endif
-                            </span>
+                           
                         </p>
                         <div class="d-md-flex mt-5 mb-5" id="reservation">
                             {{$room->description}}
@@ -133,7 +132,6 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {{-- <input type="text" name="date_in" id="checkin_date"value="{{ old('date_in') }}" class="form-control @error('date_in') is-invalid @enderror" placeholder="Data przybycia"> --}}
                                             <input type="date" name="date_in" id=""value="{{ old('date_in') }}" class="form-control @error('date_in') is-invalid @enderror" placeholder="Data przybycia">
                                             @error('date_in')
                                             <span class="invalid-feedback" role="alert">
@@ -144,7 +142,6 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {{-- <input type="text" name="date_off" id="checkin_date"value="{{ old('date_off') }}" class="form-control @error('date_off') is-invalid @enderror" placeholder="Data wymeldowania"> --}}
                                             <input type="date" name="date_off" id=""value="{{ old('date_off') }}" class="form-control @error('date_off') is-invalid @enderror" placeholder="Data wymeldowania">
                                             @error('date_off')
                                             <span class="invalid-feedback" role="alert">
@@ -162,50 +159,11 @@
                             </div>
                         </form>
                     </div>
-                    {{-- <div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-                        <h4 class="mb-4">Review &amp; Ratings</h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <form method="post" class="star-rating">
-                                            <div class="form-check">
-                                                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                  <label class="form-check-label" for="exampleCheck1">
-                                                      <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i> 100 Ratings</span></p>
-                                                  </label>
-                                            </div>
-                                            <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">
-                                                 <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i> 30 Ratings</span></p>
-                                            </label>
-                                            </div>
-                                            <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">
-                                                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 5 Ratings</span></p>
-                                           </label>
-                                            </div>
-                                            <div class="form-check">
-                                              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">
-                                                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-                                            </label>
-                                            </div>
-                                            <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">
-                                                <p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-                                              </label>
-                                            </div>
-                                          </form>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
-            </div> <!-- .col-md-8 -->
+            </div>
         </div>
     </div>
-</section> <!-- .section -->
+</section>
 
 @if ($errors->any())
     <script>

@@ -4,5 +4,6 @@
 @include('layouts.nav')
 @include('partials.reservation')
 
+@include('layouts.footer')
 
 @endsection
