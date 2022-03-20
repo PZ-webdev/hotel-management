@@ -15,9 +15,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\Models\User::factory(200)->create();
-        \App\Models\RoomType::factory(5)->create();
+        $this->call(RoomTypeSeeder::class);
+        // \App\Models\RoomType::factory(5)->create();
         \App\Models\Room::factory(30)->create();
-        \App\Models\Tag::factory(5)->create();
+        // \App\Models\Tag::factory(5)->create();
+        $this->call(TagSeeder::class);
         \App\Models\HotelTags::factory(50)->create();
         \App\Models\Rating::factory(2000)->create();
         \App\Models\Reservation::factory(100)->create();
