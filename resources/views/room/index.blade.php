@@ -41,31 +41,33 @@
                             <div class="form-group">
                                 <div class="select-wrap one-third">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                    <select name="sort" id="" class="form-control" placeholder="Kategoria">
-                                        <option value="" disabled selected>-- Sortuj --</option>
-                                        <option value="name_asc">Nazwa rosnąco</option>
-                                        <option value="name_desc">Nazwa malejąco</option>
-                                        <option value="price_asc">Cena rosnąco</option>
-                                        <option value="price_desc">Cena malejąco</option>
+                                    <select name="sort" id="" class="form-control">
+                                        <option value="" disabled selected>-- Wybierz --</option>
+                                        <option value="name_asc"   {{ request('sort') == 'name_asc' ? "selected" : "" }}>Nazwa A-Z</option>
+                                        <option value="name_desc"  {{ request('sort') == 'name_desc' ? "selected" : "" }}>Nazwa Z-A</option>
+                                        <option value="price_asc"  {{ request('sort') == 'price_asc' ? "selected" : "" }}>Cena rosnąco</option>
+                                        <option value="price_desc" {{ request('sort') == 'price_desc' ? "selected" : "" }}>Cena malejąco</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <input type="text" id="checkin_date" class="form-control" name="date_start"
-                                    placeholder="Data rozpoczęcia">
+                                    placeholder="Data rozpoczęcia" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <input type="text" id="checkin_date" class="form-control" name="date_end"
-                                    placeholder="Data zakończenia">
+                                    placeholder="Data zakończenia"  autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <div class="range-slider">
+                             
                                     <span>
-                                        <input type="number" value="200" min="0" max="1200" name="price_from"/> - <input type="number"
-                                            value="500" min="0" max="1200" name="price_to"/>
+                                        <input type="number" value="200" min="0" max="1200" id="price_from_number"/>
+                                        -
+                                        <input type="number"value="500" min="0" max="1200" id="price_to_number"/>
                                     </span>
-                                    {{-- <input value="200" min="0" max="1200" step="50" type="range" />
-                                    <input value="500" min="0" max="1200" step="50" type="range" /> --}}
+                                    <input value="{{request('price_from') ?? '200'}}" min="0" max="1200" step="50" type="range"  name="price_from" id="price_from_range"/>
+                                    <input value="{{request('price_to') ?? '500'}}" min="0" max="1200" step="50" type="range" name="price_to" id="price_to_range"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -129,4 +131,26 @@
 
 @include('layouts.footer')
 
+@endsection
+
+@section('scripts')
+    <script>
+        var price_from_range = document.getElementById("price_from_range");
+        var price_from_number = document.getElementById("price_from_number");
+        price_from_number.value = price_from_range.value;
+
+        price_from_range.oninput = function() {
+            console.log(price_from_range.value);
+            price_from_number.value = this.value;
+        }
+
+        var price_to_range = document.getElementById("price_to_range");
+        var price_to_number = document.getElementById("price_to_number");
+        price_to_number.value = price_to_range.value;
+
+        price_to_range.oninput = function() {
+            console.log(price_to_range.value);
+            price_to_number.value = this.value;
+        }
+    </script>
 @endsection

@@ -16,7 +16,8 @@ class RoomController extends Controller
      */
     public function index(Request $request)
     {
-       
+        $column = "rating_avg";
+        $sort = "DESC";
         $rooms = DB::table('ratings AS r')
             ->select([
                 'rooms.*',
@@ -24,8 +25,44 @@ class RoomController extends Controller
                 DB::raw('AVG(r.rating) AS rating_avg')
             ])
             ->join('rooms', 'rooms.id', '=', 'r.id_room')
-            ->orderBy('rating_avg', 'DESC')
+            ->when(request('sort'), function($q){
+                switch (request('sort')) {
+                    
+                    case "name_asc":
+                        $column = 'name';
+                        $sort = 'ASC';
+                        break;
+
+                    case "name_desc":
+                        $column = 'name';
+                        $sort = 'DESC';
+                        break;
+
+                    case "price_asc":
+                        $column = 'room_fee';
+                        $sort = 'ASC';
+                        break;
+
+                    case "price_desc":
+                        $column = 'room_fee';
+                        $sort = 'DESC';
+                        break;
+
+                    default:
+                        $column = "rating_avg";
+                        $sort = "DESC";
+                        break;
+                }
+
+                $q->orderBy($column, $sort);
+            })
             ->groupBy('id_room')
+            ->when(request('price_from'), function($q){
+                $q->where('room_fee', '>=', request('price_from'));
+            })
+            ->when(request('price_to'), function($q){
+                $q->where('room_fee', '<=', request('price_to'));
+            })
             ->paginate(9);
 
         $roomTypes = RoomType::all();
