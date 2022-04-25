@@ -29,3 +29,9 @@ Route::get('reservation/confirm/{id}/{hash}', [ReservationController::class, 'co
 
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('/home/reservation/details', [HomeController::class, 'getReservationDetails'])->name('reservation.details');
+
+// Route::controller(ProductController::class)->group(function(){
+//     Route::get('products', 'index');
+//     Route::post('products', 'store')->name('products.store');
+// });
