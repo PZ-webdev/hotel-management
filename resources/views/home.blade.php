@@ -2,7 +2,7 @@
 
 @section('content')
 @include('layouts.nav')
-@include('partials.reservation')
+@include('reservation')
 
 @include('layouts.footer')
 

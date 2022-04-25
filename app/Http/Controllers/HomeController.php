@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ReservationDetailResource;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::where('email', Auth::user()->email)->get();
+        $reservations = Reservation::with('rooms')->where('email', Auth::user()->email)->get();
         return view('home', compact('reservations'));
+    }
+
+    public function getReservationDetails(Request $request)
+    {
+        return new ReservationDetailResource(Reservation::findOrFail($request->id));
     }
 }
