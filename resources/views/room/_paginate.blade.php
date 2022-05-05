@@ -1,25 +1,23 @@
-
-  @if ($paginator->hasPages())
+@if ($paginator->hasPages())
     <div class="col text-center">
         <div class="block-27">
             <ul class="">
-       
+
                 @if ($paginator->onFirstPage())
                     <li class="disabled"><span>&lt;</span></li>
                 @else
                     <li><a href="{{ $paginator->previousPageUrl() }}" rel="prev">&lt;</a></li>
                 @endif
-        
-        
-              
+
+
+
                 @foreach ($elements as $element)
-                   
                     @if (is_string($element))
                         <li class="disabled"><span>{{ $element }}</span></li>
                     @endif
-        
-        
-                   
+
+
+
                     @if (is_array($element))
                         @foreach ($element as $page => $url)
                             @if ($page == $paginator->currentPage())
@@ -30,9 +28,9 @@
                         @endforeach
                     @endif
                 @endforeach
-        
-        
-                
+
+
+
                 @if ($paginator->hasMorePages())
                     <li><a href="{{ $paginator->nextPageUrl() }}" rel="next">&gt;</a></li>
                 @else
@@ -41,4 +39,4 @@
             </ul>
         </div>
     </div>
-@endif 
+@endif

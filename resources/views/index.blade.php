@@ -1,19 +1,17 @@
 @extends('layouts.app')
 
-    @section('content')
-        
+@section('content')
     @include('layouts.nav')
 
     @include('partials.hero')
-        
+
     @include('partials.services')
 
     @include('partials.offers')
-        
+
     @include('partials.testimony')
 
     @include('partials.blog-section')
-    
-    @include('layouts.footer')
 
+    @include('layouts.footer')
 @endsection

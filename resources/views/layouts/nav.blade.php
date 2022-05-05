@@ -17,7 +17,7 @@
                     <li class="nav-item cta"><a href="/login" class="nav-link"><span>Zaloguj</span></a></li>
                 @endguest
                 @auth
-                <li class="nav-item cta"><a href="/" class="nav-link"><span>Wyloguj</span></a></li>
+                    <li class="nav-item cta"><a href="/" class="nav-link"><span>Wyloguj</span></a></li>
                     {{-- <form action="{{route('logout')}}" method="post">
                         @csrf
                      <li class="nav-item cta"><a href="#" onclick="this.form.submit()" class="nav-link"><span>Wyloguj</span></a></li>
