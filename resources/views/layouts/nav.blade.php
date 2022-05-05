@@ -13,16 +13,22 @@
                 <li class="nav-item"><a href="/room" class="nav-link">Pokoje</a></li>
                 <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="/contact" class="nav-link">Kontakt</a></li>
-                @guest
-                    <li class="nav-item cta"><a href="/login" class="nav-link"><span>Zaloguj</span></a></li>
-                @endguest
-                @auth
-                    <li class="nav-item cta"><a href="/" class="nav-link"><span>Wyloguj</span></a></li>
-                    {{-- <form action="{{route('logout')}}" method="post">
-                        @csrf
-                     <li class="nav-item cta"><a href="#" onclick="this.form.submit()" class="nav-link"><span>Wyloguj</span></a></li>
-                    </form> --}}
-                @endauth
+                @if (Auth::check())
+                    <li class="nav-item cta">
+                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                            Wyloguj się
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                @else
+                    <li class="nav-item cta">
+                        <a class="nav-link " href="{{ route('login') }}">Zaloguj się</a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>
