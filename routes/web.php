@@ -35,3 +35,7 @@ Route::post('/home/reservation/details', [HomeController::class, 'getReservation
 //     Route::get('products', 'index');
 //     Route::post('products', 'store')->name('products.store');
 // });
+
+Route::get('/contact', function (){
+    return view('pages.contact');
+});
