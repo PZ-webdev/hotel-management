@@ -30,8 +30,8 @@ Route::resource('reservation', ReservationController::class)->only('store', 'sho
 Route::get('reservation/confirm/{id}/{hash}', [ReservationController::class, 'confirm'])->name('reservation.confirm');
 
 Route::controller(ReservationController::class)->middleware('auth')->group(function () {
-    Route::get('/home', 'index')->name('home');
-    Route::post('/home/reservation/details', 'getReservationDetails')->name('reservation.details');
+    Route::get('/reservation', 'index')->name('home');
+    Route::post('/reservation/details', 'getReservationDetails')->name('reservation.details');
 });
 
 Route::get('/contact', function () {

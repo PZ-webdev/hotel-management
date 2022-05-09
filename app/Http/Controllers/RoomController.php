@@ -25,9 +25,9 @@ class RoomController extends Controller
                 DB::raw('AVG(r.rating) AS rating_avg')
             ])
             ->join('rooms', 'rooms.id', '=', 'r.id_room')
-            ->when(request('sort'), function($q){
+            ->when(request('sort'), function ($q) {
                 switch (request('sort')) {
-                    
+
                     case "name_asc":
                         $column = 'name';
                         $sort = 'ASC';
@@ -57,11 +57,15 @@ class RoomController extends Controller
                 $q->orderBy($column, $sort);
             })
             ->groupBy('id_room')
-            ->when(request('price_from'), function($q){
+            ->when(request('price_from'), function ($q) {
                 $q->where('room_fee', '>=', request('price_from'));
             })
-            ->when(request('price_to'), function($q){
+            ->when(request('price_to'), function ($q) {
                 $q->where('room_fee', '<=', request('price_to'));
+            })
+            ->when(request('text'), function ($q) {
+                $q->where('name', 'LIKE', '%' . request('text') . '%')
+                ->orWhere('description', 'LIKE', '%' . request('text') . '%');
             })
             ->paginate(9);
 
@@ -140,5 +144,4 @@ class RoomController extends Controller
     {
         //   
     }
-
 }
