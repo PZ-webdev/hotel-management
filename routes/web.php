@@ -37,3 +37,7 @@ Route::controller(ReservationController::class)->middleware('auth')->group(funct
 Route::get('/contact', function () {
     return view('pages.contact');
 });
+
+Route::get('/hotel', function () {
+    return view('pages.about');
+});
