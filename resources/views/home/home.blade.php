@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.nav')
-    @include('reservation')
+    @include('home.reservation')
 
     @include('layouts.footer')
 @endsection

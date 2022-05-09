@@ -120,7 +120,7 @@ class ReservationController extends Controller
      */
     public function confirm($id, $hash)
     {
-        $reservation = Reservation::find($id);
+        $reservation = Reservation::findOrFail($id);
 
         if ($reservation->verified_at == null) {
             $hashCode = hash('sha512', $reservation->confirm_code);
@@ -128,7 +128,7 @@ class ReservationController extends Controller
                 $reservation->verified_at = now();
                 $reservation->save();
 
-                alert()->success('Udało się !', 'Twoja rezerwacja została potwierdzona. Do zobaczenia !');
+                alert()->success('Potwierdzone!', 'Twoja rezerwacja została potwierdzona. Do zobaczenia !');
             } else {
                 alert()->error('Wystąpił Błąd', 'Niepoprawny odnośnik potwierdzający rezerwację.');
             }

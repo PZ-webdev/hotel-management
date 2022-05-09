@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $reservations = Reservation::with('rooms')->where('email', Auth::user()->email)->get();
-        return view('home', compact('reservations'));
+        return view('home.home', compact('reservations'));
     }
 
     public function getReservationDetails(Request $request)
