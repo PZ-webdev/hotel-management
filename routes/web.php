@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
 Route::resource('room', RoomController::class)->scoped(['room' => 'slug'])->only('index', 'show');
@@ -26,16 +29,11 @@ Route::resource('reservation', ReservationController::class)->only('store', 'sho
 
 Route::get('reservation/confirm/{id}/{hash}', [ReservationController::class, 'confirm'])->name('reservation.confirm');
 
+Route::controller(ReservationController::class)->middleware('auth')->group(function () {
+    Route::get('/home', 'index')->name('home');
+    Route::post('/home/reservation/details', 'getReservationDetails')->name('reservation.details');
+});
 
-Auth::routes();
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::post('/home/reservation/details', [HomeController::class, 'getReservationDetails'])->name('reservation.details');
-
-// Route::controller(ProductController::class)->group(function(){
-//     Route::get('products', 'index');
-//     Route::post('products', 'store')->name('products.store');
-// });
-
-Route::get('/contact', function (){
+Route::get('/contact', function () {
     return view('pages.contact');
 });

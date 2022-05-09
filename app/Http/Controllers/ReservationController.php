@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationRequest;
+use App\Http\Resources\ReservationDetailResource;
 use App\Mail\ConfirmReservation;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
@@ -17,7 +19,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = Reservation::with('rooms')->where('email', Auth::user()->email)->get();
+        return view('home.home', compact('reservations'));
     }
 
     /**
@@ -137,5 +140,10 @@ class ReservationController extends Controller
         }
 
         return redirect()->route('room.index');
+    }
+
+    public function getReservationDetails(Request $request)
+    {
+        return new ReservationDetailResource(Reservation::findOrFail($request->id));
     }
 }
