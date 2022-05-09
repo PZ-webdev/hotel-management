@@ -8,21 +8,31 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="/" class="nav-link">Start</a></li>
+                <li class="nav-item"><a href="/" class="nav-link">Start</a></li>
                 <li class="nav-item"><a href="/hotel" class="nav-link">Hotel</a></li>
                 <li class="nav-item"><a href="/room" class="nav-link">Pokoje</a></li>
                 <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="/contact" class="nav-link">Kontakt</a></li>
                 @if (Auth::check())
-                    <li class="nav-item cta">
-                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                            Wyloguj się
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbar" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Konto
                         </a>
+                        <div class="dropdown-menu" aria-labelledby="navbar">
+                            <a class="dropdown-item" href="#"><strong>{{ Auth::user()->name() }}</strong></a>
+                            <a class="dropdown-item" href="{{ route('home') }}">Rezerwacje</a>
+                            <a class="dropdown-item" href="#">Profil</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                Wyloguj się
+                            </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                class="d-none">
+                                @csrf
+                            </form>
+                        </div>
                     </li>
                 @else
                     <li class="nav-item cta">
