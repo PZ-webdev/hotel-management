@@ -32,7 +32,9 @@
                                         <select name="type" id="" class="form-control" placeholder="Kategoria">
                                             <option value="" disabled selected>-- Rodzaj Pokoju --</option>
                                             @foreach ($roomTypes as $roomType)
-                                                <option value="{{ $roomType->id }}">{{ $roomType->name }}</option>
+                                                <option value="{{ $roomType->id }}"
+                                                    {{ request('type') == $roomType->id ? 'selected' : '' }}>
+                                                    {{ $roomType->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -57,11 +59,13 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="text" id="checkin_date" class="form-control" name="date_start"
-                                        placeholder="Data rozpoczęcia" autocomplete="off">
+                                        placeholder="Data rozpoczęcia" autocomplete="off"
+                                        value="{{ request('date_start') }}">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" id="checkin_date" class="form-control" name="date_end"
-                                        placeholder="Data zakończenia" autocomplete="off">
+                                        placeholder="Data zakończenia" autocomplete="off"
+                                        value="{{ request('date_end') }}">
                                 </div>
                                 <div class="form-group">
                                     <div class="range-slider">
