@@ -82,6 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <a href="{{ route('room.index') }}" class="btn btn-primary py-3 px-5 mb-2">Reset</a>
                                     <input type="submit" value="Szukaj" class="btn btn-primary py-3 px-5">
                                 </div>
                             </div>
@@ -137,7 +138,8 @@
                         @endforeach
                     </div>
                     <div class="row mt-5">
-                        {{ $rooms->links('room._paginate') }}
+                        {{-- {{ $rooms->links('room._paginate') }} --}}
+                        {{$rooms->appends(request()->input())->links('room._paginate')}}
                     </div>
                 </div>
             </div>

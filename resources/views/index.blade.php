@@ -5,7 +5,7 @@
 
     @include('partials.hero')
 
-    @include('partials.services')
+    {{-- @include('partials.services') --}}
 
     @include('partials.offers')
 
