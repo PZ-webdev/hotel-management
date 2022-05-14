@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\ReservationDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,9 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ReservationDataTable $dataTable)
     {
-        return view('admin.reservation.index');
+        return $dataTable->render('admin.reservation.index');
     }
 
     /**

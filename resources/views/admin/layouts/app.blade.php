@@ -15,8 +15,8 @@
     <link rel="stylesheet"
         href="{{ asset('admin_panel/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css') }}">
     <link href="{{ asset('admin_panel/css/style.min.css') }}" rel="stylesheet">
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css"> --}}
 
 </head>
 
@@ -46,11 +46,12 @@
         </div>
 
     </div>
+    {!! Html::script(asset('admin_panel/plugins/datatable/js/jquery.dataTables.min.js')) !!}
+    {!! Html::script(asset('admin_panel/plugins/datatable/js/dataTables.bootstrap5.min.js')) !!}
 
-    <script src="{{ asset('admin_panel/plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
-    <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap5.min.js"></script>
-
+    {!! Html::style(asset('admin_panel/plugins/datatable/css/dataTables.bootstrap5.min.css')) !!}
+    {{-- <script src="{{ asset('admin_panel/plugins/bower_components/jquery/dist/jquery.min.js') }}"></script> --}}
+  
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{ asset('admin_panel/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('admin_panel/js/app-style-switcher.js') }}"></script>

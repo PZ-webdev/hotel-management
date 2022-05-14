@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Room;
 use Illuminate\Http\Request;
+use App\DataTables\RoomDataTable;
 
 class RoomController extends Controller
 {
@@ -12,9 +14,9 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(RoomDataTable $dataTable)
     {
-        return view('admin.room.index');
+        return $dataTable->render('admin.room.index');
     }
 
     /**
