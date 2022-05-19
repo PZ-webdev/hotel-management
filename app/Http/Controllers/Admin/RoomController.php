@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use App\DataTables\RoomDataTable;
+use App\Http\Requests\RoomStoreRequest;
+use App\Models\RoomType;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class RoomController extends Controller
 {
@@ -26,18 +30,31 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
-    }
+        $types = RoomType::all();
 
+        return view('admin.room.create', compact('types'));
+    }
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoomStoreRequest $request)
     {
-        //
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+
+        // TODO: Fix this
+        // Storage::disk('local')->put('images'.'/'.$imageName, 'public');
+
+        $room = new Room($request->validated());
+        $room->image = $imageName;
+        $room->slug  = Str::slug($request->name);
+        $room->save();
+
+        alert()->success('Sukces', 'Poprawnie dodano pokój !');
+        return redirect()->route('admin.room.index');
     }
 
     /**
@@ -57,9 +74,11 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Room $room)
     {
-        //
+        $types = RoomType::all();
+
+        return view('admin.room.edit', compact('room', 'types'));
     }
 
     /**
@@ -80,8 +99,13 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Room $room)
     {
-        //
+        try {
+            $room->delete();
+            return response()->json(['message' => 'Pokój został usunięty.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ten pokój jest zarezerwowany !'], 500);
+        }
     }
 }

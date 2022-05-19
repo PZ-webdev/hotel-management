@@ -9,11 +9,28 @@ class Room extends Model
 {
     use HasFactory;
 
-    public $fillable = ['id_room'];
+    public $fillable = [
+        'name',
+        'slug',
+        'description',
+        'room_type',
+        'room_fee',
+        'image',
+    ];
 
     public function rating()
     {
         return $this->hasMany(Rating::class, 'id_room', 'id');
+    }
+
+    public function type()
+    {
+        // $this->belongsToMany();
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'hotel_tags', 'id_room', 'id_tags');
     }
 
 
