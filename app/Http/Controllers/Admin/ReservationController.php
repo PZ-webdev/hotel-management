@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\ReservationDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
+use App\Models\Room;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -59,7 +61,10 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        return view('admin.reservation.edit', compact('reservation'));
+        $rooms = Room::all();
+        $reservation->with('rooms');
+
+        return view('admin.reservation.edit', compact('reservation', 'rooms'));
     }
 
     /**
@@ -71,7 +76,23 @@ class ReservationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $reservation = Reservation::findOrFail($id);
+        $reservation->update([
+            'id_room' => $request->id_room,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'city' => $request->city,
+            'phone' => $request->phone,
+            'date_start' => $request->date_start,
+            'date_end' => $request->date_end,
+            'verified_at' => $request->verified_at ? Carbon::now() : null,
+        ]);
+        $reservation->save();
+
+        alert()->success('Sukces', 'Edytowano Rezerwację.');
+        return redirect()->back();
     }
 
     /**

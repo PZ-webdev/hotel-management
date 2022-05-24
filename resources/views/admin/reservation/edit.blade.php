@@ -23,44 +23,90 @@
             <div class="col-sm-12">
                 <div class="white-box">
                     <h3>ID Rezerwacji: {{ $reservation->id }} </h3>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Dane</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">Imie i Nazwisko</th>
-                                <td>{{ $reservation->first_name . ' ' . $reservation->last_name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">E-mail</th>
-                                <td>{{ $reservation->email }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Telefon</th>
-                                <td>{{ $reservation->phone }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Adres</th>
-                                <td>{{ $reservation->address . ' - ' . $reservation->city }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Data Wynajmu</th>
-                                <td>{{ $reservation->date_start . ' - ' . $reservation->date_end }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Kod potwierdzenia</th>
-                                <td>{{ $reservation->confirm_code }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Potwierdzenie</th>
-                                <td>{{ $reservation->verified_at == null ? '---' : $reservation->verified_at }}</td>
-                            </tr>
-                        </tbody>
+                    <form action="{{ route('admin.reservation.update', $reservation->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Dane</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Imie i Nazwisko</th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-6"> <input type="text" class="form-control"
+                                                    value="{{ $reservation->first_name }}" name="first_name"></div>
+                                            <div class="col-md-6"> <input type="text" class="form-control"
+                                                    value="{{ $reservation->last_name }}" name="last_name"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">E-mail</th>
+                                    <td> <input type="text" class="form-control" value="{{ $reservation->email }}"
+                                            name="email"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Telefon</th>
+                                    <td> <input type="text" class="form-control" value="{{ $reservation->phone }}"
+                                            name="phone"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Adres</th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-6"> <input type="text" class="form-control"
+                                                    value="{{ $reservation->address }}" name="address"></div>
+                                            <div class="col-md-6"> <input type="text" class="form-control"
+                                                    value="{{ $reservation->city }}" name="city"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Data Wynajmu</th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-6"> <input type="date" class="form-control"
+                                                    value="{{ $reservation->date_start }}" name="date_start"></div>
+                                            <div class="col-md-6"> <input type="date" class="form-control"
+                                                    value="{{ $reservation->date_end }}" name="date_end"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Pokój</th>
+                                    <td>
+                                        <select name="id_room" id="" class="form-control">
+                                            @foreach ($rooms as $room)
+                                                <option value="{{ $room->id }}"
+                                                    {{ $reservation->id_room == $room->id ? 'selected' : '' }}>
+                                                    {{ $room->name }}</option>
+                                            @endforeach
+                                        </select>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Kod potwierdzenia</th>
+                                    <td><input type="text" class="form-control"
+                                            value="{{ $reservation->confirm_code }}" name="confirm_code" disabled />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Potwierdzenie</th>
+                                    <td> <input type="checkbox" id="confirm" class="form-check-input"
+                                            {{ $reservation->verified_at != null ? 'checked' : '' }} name="verified_at"
+                                            value="1">
+                                        <label
+                                            for="confirm">{{ $reservation->verified_at == null ? 'Potwierdź' : $reservation->verified_at }}</label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                    </form>
                     </table>
+                    <button class="btn btn-success">Zapisz</button>
                 </div>
             </div>
         </div>
