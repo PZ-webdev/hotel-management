@@ -19,6 +19,7 @@
                             <th scope="col">Suma dni</th>
                             <th scope="col">Opłata</th>
                             <th>Szczegóły</th>
+                            <th>Potwierdzenie</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,14 @@
                                 <td><button class="btn btn-sm btn-info button-info btn-submit"
                                         data-id="{{ $reservation->id }}" data-toggle="modal"
                                         data-target="#exampleModal"><i class="icon-info-circle"></i></button></td>
+                                @if ($reservation->verified_at == null)
+                                    <td>
+                                        <a href="{{ route('reservation.confirm.auth', $reservation->id) }}"
+                                            class="btn btn-sm btn-warning button-info">
+                                            <i class="ion-ios-checkmark"></i>
+                                        </a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

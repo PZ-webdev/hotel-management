@@ -28,6 +28,7 @@ Route::resource('room', RoomController::class)->scoped(['room' => 'slug'])->only
 Route::resource('reservation', ReservationController::class)->only('store', 'show');
 
 Route::get('reservation/confirm/{id}/{hash}', [ReservationController::class, 'confirm'])->name('reservation.confirm');
+Route::get('reservation/confirm/{id}', [ReservationController::class, 'confirmAuth'])->name('reservation.confirm.auth');
 
 Route::controller(ReservationController::class)->middleware('auth')->group(function () {
     Route::get('/reservation', 'index')->name('home');

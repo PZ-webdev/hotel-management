@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
+use function PHPUnit\Framework\isEmpty;
+
 class ReservationController extends Controller
 {
     /**
@@ -145,5 +147,18 @@ class ReservationController extends Controller
     public function getReservationDetails(Request $request)
     {
         return new ReservationDetailResource(Reservation::findOrFail($request->id));
+    }
+
+    public function confirmAuth($id)
+    {
+        $reservation = Reservation::where('id', $id)->where('email', Auth::user()->email)->where('verified_at', null)->firstOrFail();
+
+        $reservation->update([
+            'verified_at' => now()
+        ]);
+        $reservation->save();
+
+        alert()->success('Potwierdzone!', 'Twoja rezerwacja została potwierdzona. Do zobaczenia !');
+        return redirect()->back();
     }
 }
