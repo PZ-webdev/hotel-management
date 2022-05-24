@@ -19,7 +19,6 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="white-box">
-                    <h3 class="box-title">Rezerwacje</h3>
                     <div class="table-responsive">
                         {!! $dataTable->table([], true) !!}
                     </div>
@@ -28,4 +27,61 @@
         </div>
     </div>
     {{ $dataTable->scripts() }}
+
+    <script>
+        $(function() {
+            //ajax setup
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            //delete action
+            $(document).on("click", "#delete", function(e) {
+                e.preventDefault();
+                let link = $(this).attr("href");
+                let table = $(this).data('table');
+
+                Swal.fire({
+                        title: 'Jesteś pewny?',
+                        text: "Jeśli usuniesz, zmiany będą nieodwracalne!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Tak, usuń'
+                    })
+                    .then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                url: link,
+                                type: 'DELETE',
+                                data: {
+                                    _method: "DELETE"
+                                },
+                                success: function(data, textStatus, xhr) {
+                                    setTimeout(function() {
+                                        $(this).parents("tr").remove();
+                                        $('#' + table).DataTable().ajax.reload();
+                                        return false;
+                                    }, 500);
+
+                                    Toast.fire({
+                                        icon: 'success',
+                                        title: data.message
+                                    });
+                                },
+                                error: function(data, textStatus, xhr) {
+                                    Toast.fire({
+                                        icon: 'error',
+                                        title: data.responseJSON.message
+                                    });
+                                }
+                            })
+                        }
+                    })
+
+            })
+        });
+    </script>
 @endsection

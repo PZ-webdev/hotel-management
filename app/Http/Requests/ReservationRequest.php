@@ -24,8 +24,9 @@ class ReservationRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
+            //TODO: get string to name
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|email',
             'address' => 'required',
             'city' => 'required',
@@ -44,7 +45,9 @@ class ReservationRequest extends FormRequest
     {
         return [
             'first_name.required' => 'Pole Imię jest wymagane',
+            'first_name.string' => 'Pole Imię musi zawierać tylko litery',
             'last_name.required' => 'Pole Nazwisko jest wymagane',
+            'last_name.string' => 'Pole Nazwisko musi zawierać tylko litery',
             'email.required' => 'Pole E-mail jest wymagane',
             'email.email' => 'Niepoprawny adres e-mail',
             'address.required' => 'Pole Adres jest wymagane',

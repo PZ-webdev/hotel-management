@@ -3,10 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Reservation;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class ReservationDataTable extends DataTable
@@ -21,7 +18,19 @@ class ReservationDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'reservation.action');
+            ->addColumn('id_room', function ($model) {
+                return $model->rooms->name;
+            })
+            ->addColumn('name', function ($model) {
+                return $model->first_name . ' ' . $model->last_name;
+            })
+            ->addColumn('count_days', function ($model) {
+                return $model->dateDiffInDays($model->date_start, $model->date_end);
+            })
+            ->addColumn('verified_at', function ($model) {
+                return $model->verified_at != null ? "Tak" : "Nie";
+            })
+            ->addColumn('action', 'admin.reservation.actions');
     }
 
     /**
@@ -33,7 +42,7 @@ class ReservationDataTable extends DataTable
     public function query(Reservation $model)
     {
         return Reservation::with('rooms')
-            ->select('id_room', 'date_start', 'date_end', 'verified_at')
+            ->select('id', 'id_room','first_name', 'last_name', 'date_start', 'date_end', 'verified_at')
             ->newQuery();
     }
 
@@ -61,15 +70,18 @@ class ReservationDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id_room'),
-            Column::make('date_start'),
-            Column::make('date_end'),
-            Column::make('verified_at'),
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
+            Column::make('id')->title('ID'),
+            Column::make('id_room')->title('Pokój'),
+            Column::make('name')->title('Klient'),
+            Column::make('date_start')->title('Od'),
+            Column::make('date_end')->title('Do'),
+            Column::make('count_days')->title('Liczba dni'),
+            Column::make('verified_at')->title('Potwierdzono'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('text-center')
+                ->title('Akcja'),
         ];
     }
 
