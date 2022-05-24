@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>Panel Administratora - Hotel el Mundo.</title>
 
@@ -18,9 +19,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css"> --}}
 
+    <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
 </head>
 
 <body>
+    @include('sweetalert::alert')
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -64,10 +67,10 @@
     <script src="{{ asset('admin_panel/js/custom.js') }}"></script>
     <!--This page JavaScript -->
     <!--chartis chart-->
-    {{-- <script src="{{ asset('admin_panel/plugins/bower_components/chartist/dist/chartist.min.js') }}"></script> --}}
-    {{-- <script
+    <script src="{{ asset('admin_panel/plugins/bower_components/chartist/dist/chartist.min.js') }}"></script>
+    <script
         src="{{ asset('admin_panel/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}">
-    </script> --}}
+    </script>
     <script src="{{ asset('admin_panel/js/pages/dashboards/dashboard1.js') }}"></script>
     @yield('scripts')
 </body>

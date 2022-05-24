@@ -42,14 +42,10 @@ class RoomController extends Controller
      */
     public function store(RoomStoreRequest $request)
     {
-        $imageName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
-
-        // TODO: Fix this
-        // Storage::disk('local')->put('images'.'/'.$imageName, 'public');
-
+        $path = $request->image->store('images/rooms');
+     
         $room = new Room($request->validated());
-        $room->image = $imageName;
+        $room->image = $path;
         $room->slug  = Str::slug($request->name);
         $room->save();
 
