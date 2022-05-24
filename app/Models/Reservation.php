@@ -17,11 +17,20 @@ class Reservation extends Model
     public function dateDiffInDays($date1, $date2)
     {
         $diff = strtotime($date2) - strtotime($date1);
-        return abs(round($diff / 86400));
+        return abs(round($diff / 86400)) + 1;
     }
 
     public function payment($days, $prices)
     {
         return $days * $prices;
+    }
+
+    public function confirm($verified)
+    {
+        if ($verified != null) {
+            echo "<span class='badge bg-success rounded'>Tak</span>";
+        } else {
+            echo "<span class='badge bg-danger rounded'>Nie</span>";
+        }
     }
 }

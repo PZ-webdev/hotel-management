@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Reservation;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,7 +16,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $reservationCount = Reservation::count();
+        $roomCount = Room::count();
+        $lastReservations = Reservation::latest()->take(8)->get();
+
+        return view('admin.index', compact('reservationCount', 'roomCount', 'lastReservations'));
     }
 
     /**
