@@ -19,7 +19,7 @@
                             <th scope="col">Suma dni</th>
                             <th scope="col">Opłata</th>
                             <th>Szczegóły</th>
-                            <th>Potwierdzenie</th>
+                            {{-- <th>Potwierdzenie</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -37,17 +37,18 @@
                                 </td>
                                 <td>{{ $reservation->payment($reservation->rooms->room_fee, $price) }}zł
                                 </td>
-                                <td><button class="btn btn-sm btn-info button-info btn-submit"
+                                <td>
+                                    <button class="btn btn-sm btn-info button-info btn-submit"
                                         data-id="{{ $reservation->id }}" data-toggle="modal"
-                                        data-target="#exampleModal"><i class="icon-info-circle"></i></button></td>
-                                @if ($reservation->verified_at == null)
-                                    <td>
+                                        data-target="#exampleModal"><i class="icon-info-circle"></i></button>
+
+                                    @if ($reservation->verified_at == null)
                                         <a href="{{ route('reservation.confirm.auth', $reservation->id) }}"
-                                            class="btn btn-sm btn-warning button-info">
+                                            class="btn btn-sm btn-warning button-info" style="float: right;">
                                             <i class="ion-ios-checkmark"></i>
                                         </a>
-                                    </td>
-                                @endif
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
