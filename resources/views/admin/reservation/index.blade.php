@@ -55,7 +55,7 @@
                         if (result.value) {
                             $.ajax({
                                 url: link,
-                                type: 'DELETE',
+                                type: 'POST',
                                 data: {
                                     _method: "DELETE"
                                 },

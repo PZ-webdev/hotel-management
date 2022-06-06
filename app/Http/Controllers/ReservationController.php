@@ -6,11 +6,10 @@ use App\Http\Requests\ReservationRequest;
 use App\Http\Resources\ReservationDetailResource;
 use App\Mail\ConfirmReservation;
 use App\Models\Reservation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-
-use function PHPUnit\Framework\isEmpty;
 
 class ReservationController extends Controller
 {
@@ -113,7 +112,10 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = Reservation::findOrFail($id);
+        $res->delete();
+
+        return response(['message' => 'Rezerwacja została usunięta.']);
     }
 
     /**

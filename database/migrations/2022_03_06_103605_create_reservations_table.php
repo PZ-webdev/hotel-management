@@ -27,6 +27,7 @@ return new class extends Migration
             $table->date('date_end');
             $table->integer('confirm_code');
             $table->timestamp('verified_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\ReservationDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ReservationUpdateRequest;
 use App\Models\Reservation;
 use App\Models\Room;
 use Carbon\Carbon;
@@ -74,7 +75,7 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ReservationUpdateRequest $request, $id)
     {
         $reservation = Reservation::findOrFail($id);
         $reservation->update([
@@ -103,6 +104,9 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        return Reservation::destroy($reservation->id);
+        $res = Reservation::findOrFail($reservation->id);
+        $res->delete();
+
+        return response(['message' => 'Rezerwacja została usunięta.']);
     }
 }
