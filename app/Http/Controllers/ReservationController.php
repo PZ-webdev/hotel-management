@@ -6,6 +6,7 @@ use App\Http\Requests\ReservationRequest;
 use App\Http\Resources\ReservationDetailResource;
 use App\Mail\ConfirmReservation;
 use App\Models\Reservation;
+use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,13 +43,19 @@ class ReservationController extends Controller
      */
     public function store(ReservationRequest $request)
     {
+        $room = Room::find($request->id_room);
+        if ($room == null) {
+            alert()->error(__('custom.oops'), __('custom.roomNotFound'));
+            return back();
+        }
+
         $checkRoom = Reservation::where('id_room', $request->id_room)
             ->where('date_end', '>', $request->date_in)
             ->orderBy('date_end', 'desc')
             ->first();
 
         if (!empty($checkRoom) > 0) {
-            alert()->error('Uuuups !', 'Wybrany pokój jest w trakcie rezerwacji do dnia: ' . $checkRoom->date_end);
+            alert()->error(__('custom.oops'), __('custom.oops')  . $checkRoom->date_end);
         } else {
             $reservation = new Reservation();
             $reservation->id_room    = $request->id_room;
@@ -65,7 +72,7 @@ class ReservationController extends Controller
 
             //TODO: change to email on email->request;
             Mail::to('patryk.zaprzala@gmail.com')->send(new ConfirmReservation($reservation));
-            alert()->success('Udało się !', 'Potwierdzenie rezerwacji zostało wysłane na podany adres e-mail');
+            alert()->success(__('custom.success'),  __('custom.confirmSendEmail'));
         }
         return back();
     }
@@ -115,7 +122,7 @@ class ReservationController extends Controller
         $res = Reservation::findOrFail($id);
         $res->delete();
 
-        return response(['message' => 'Rezerwacja została usunięta.']);
+        return response(['message' => __('custom.deleteReservation')]);
     }
 
     /**
@@ -135,12 +142,12 @@ class ReservationController extends Controller
                 $reservation->verified_at = now();
                 $reservation->save();
 
-                alert()->success('Potwierdzone!', 'Twoja rezerwacja została potwierdzona. Do zobaczenia !');
+                alert()->success(__('custom.confirm'), __('custom.confirmReservation'));
             } else {
-                alert()->error('Wystąpił Błąd', 'Niepoprawny odnośnik potwierdzający rezerwację.');
+                alert()->error(__('custom.error'),  __('custom.errorURL'));
             }
         } else {
-            alert()->info('Informacja', 'Twoja rezerwacja została potwierdzona, dnia: ' . $reservation->verified_at);
+            alert()->info(__('custom.information'), __('custom.confirmReservationAtDay') . $reservation->verified_at);
         }
 
         return redirect()->route('room.index');
@@ -160,7 +167,7 @@ class ReservationController extends Controller
         ]);
         $reservation->save();
 
-        alert()->success('Potwierdzone!', 'Twoja rezerwacja została potwierdzona. Do zobaczenia !');
+        alert()->success(__('custom.confirm'), __('custom.confirmReservation'));
         return redirect()->back();
     }
 }
