@@ -22,7 +22,6 @@ return new class extends Migration
             $table->foreign('room_type')->references('id')->on('room_types');
             $table->double('room_fee');
             $table->string('image');
-            $table->boolean('is_empty')->default(false);
             $table->timestamps();
         });
     }

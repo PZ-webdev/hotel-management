@@ -24,7 +24,6 @@ class RoomFactory extends Factory
             'room_type' => rand(1, RoomType::count()),
             'room_fee' => $this->faker->numberBetween($min = 150, $max = 800),
             'image' => $this->faker->imageUrl($width = 640, $height = 480),
-            'is_empty' => $this->faker->boolean(), 
         ];
     }
 }
