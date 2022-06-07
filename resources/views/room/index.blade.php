@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.nav')
 
-    <div class="hero-wrap js-fullheight" style="background-image: url('images/bg_5.jpg');">
+    <div class="hero-wrap" style="background-image: url('images/bg_5.jpg'); height: 250px;">
         <div class="overlay"></div>
         <div class="container">
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
@@ -138,7 +138,6 @@
                         @endforeach
                     </div>
                     <div class="row mt-5">
-                        {{-- {{ $rooms->links('room._paginate') }} --}}
                         {{$rooms->appends(request()->input())->links('room._paginate')}}
                     </div>
                 </div>
@@ -156,7 +155,6 @@
         price_from_number.value = price_from_range.value;
 
         price_from_range.oninput = function() {
-            console.log(price_from_range.value);
             price_from_number.value = this.value;
         }
 
@@ -165,7 +163,6 @@
         price_to_number.value = price_to_range.value;
 
         price_to_range.oninput = function() {
-            console.log(price_to_range.value);
             price_to_number.value = this.value;
         }
     </script>
