@@ -49,7 +49,7 @@ class RoomController extends Controller
         $room->slug  = Str::slug($request->name);
         $room->save();
 
-        alert()->success('Sukces', 'Poprawnie dodano pokój !');
+        alert()->success(__('admin.success'), __('admin.addRommSuccessfully'));
         return redirect()->route('admin.room.index');
     }
 
@@ -99,9 +99,9 @@ class RoomController extends Controller
     {
         try {
             $room->delete();
-            return response()->json(['message' => 'Pokój został usunięty.'], 200);
+            return response()->json(['message' => __('admin.roomDestroyed')], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ten pokój jest zarezerwowany !'], 500);
+            return response()->json(['message' => __('admin.roomIsReserved')], 400);
         }
     }
 }

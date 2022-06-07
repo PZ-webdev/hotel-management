@@ -46,24 +46,22 @@
             <div class="col-lg-8 col-xlg-9 col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form-horizontal form-material">
-                            <div class="form-group mb-4">
-                                <label class="col-md-12 p-0">Imię i Nazwisko</label>
-                                <div class="col-md-12 border-bottom p-0">
-                                    <input type="text" placeholder="{{ Auth::user()->name() }}" class="form-control p-0 border-0">
-                                </div>
-                            </div>
-                            <div class="form-group mb-4">
-                                <label for="example-email" class="col-md-12 p-0">Email</label>
-                                <div class="col-md-12 border-bottom p-0">
-                                    <input type="email" placeholder="{{ Auth::user()->email }}" class="form-control p-0 border-0"
-                                        name="example-email" id="example-email">
-                                </div>
-                            </div>
+                        <form class="form-horizontal form-material" action="{{ route('admin.profile.update', Auth::id() ) }}" method="POST">
+                            @csrf
+                            @method('PUT')
                             <div class="form-group mb-4">
                                 <label class="col-md-12 p-0">Hasło</label>
                                 <div class="col-md-12 border-bottom p-0">
-                                    <input type="password" placeholder="Wprowadź hasło" class="form-control p-0 border-0">
+                                    <input type="password" placeholder="Wprowadź hasło" class="form-control p-0 border-0"
+                                    name="password">
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">Potwierdź hasło</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <input type="password" placeholder="Wprowadź hasło"
+                                        class="form-control p-0 border-0"
+                                        name="password_confirmation">
                                 </div>
                             </div>
                             <div class="form-group mb-4">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -69,7 +71,19 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        if ($request->password != $request->password_confirmation) {
+            alert()->error(__('admin.error'), __('admin.passwordDiffers'));
+            return redirect()->back();
+        }
+
+        $user->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        alert()->success(__('admin.success'), __('admin.passwordChanged'));
+        return redirect()->back();
     }
 
     /**

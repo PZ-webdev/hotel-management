@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
     Route::resource('/', AdminController::class)->only('index');
-    Route::resource('/profile', ProfileController::class)->only('index');
+    Route::resource('/profile', ProfileController::class)->only('index', 'update');
     Route::resource('/reservation', ReservationController::class);
     Route::resource('/room', RoomController::class);
