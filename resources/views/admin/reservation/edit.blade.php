@@ -23,6 +23,15 @@
             <div class="col-sm-12">
                 <div class="white-box">
                     <h3>ID Rezerwacji: {{ $reservation->id }} </h3>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{ route('admin.reservation.update', $reservation->id) }}" method="post">
                         @csrf
                         @method('PUT')
@@ -38,10 +47,23 @@
                                     <th scope="row">Imie i Nazwisko</th>
                                     <td>
                                         <div class="row">
-                                            <div class="col-md-6"> <input type="text" class="form-control"
-                                                    value="{{ $reservation->first_name }}" name="first_name"></div>
-                                            <div class="col-md-6"> <input type="text" class="form-control"
-                                                    value="{{ $reservation->last_name }}" name="last_name"></div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control"
+                                                    value="{{ $reservation->first_name }}" name="first_name">
+                                                {{-- @error('first_name') --}}
+                                                <span class="invalid-feedback is-invalid" role="alert">
+                                                    <strong>message</strong>
+                                                    {{-- </span> --}}
+                                            </div>
+                                            <div class="col-md-6"> <input type="text"
+                                                    class="form-control @error('last_name') is-invalid @enderror"
+                                                    value="{{ $reservation->last_name }}" name="last_name">
+                                                @error('last_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>

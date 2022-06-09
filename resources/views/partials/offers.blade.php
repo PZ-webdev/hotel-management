@@ -43,7 +43,7 @@
                             <p class="bottom-area d-flex">
                                 <span><i class="icon-map-o"></i> Miami, Fl</span>
                                 <span class="ml-auto"><a href="{{ route('room.show', $room->slug) }}"
-                                        class="{{ $room->is_empty ? 'bg-danger' : '' }}">
+                                        class="bg-success">
                                         Rezerwuj
                                     </a></span>
                             </p>

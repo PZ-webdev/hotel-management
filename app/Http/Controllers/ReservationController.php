@@ -55,9 +55,13 @@ class ReservationController extends Controller
             ->first();
 
         if (!empty($checkRoom) > 0) {
-            alert()->error(__('custom.oops'), __('custom.oops')  . $checkRoom->date_end);
+            alert()->error(__('custom.oops'), __('custom.roomIsReservated')  . $checkRoom->date_end);
         } else {
             $reservation = new Reservation();
+            
+            $days  = $reservation->dateDiffInDays($request->date_start, $request->date_end);
+            $price = $reservation->payment($days, $room->room_fee);
+
             $reservation->id_room    = $request->id_room;
             $reservation->first_name = $request->first_name;
             $reservation->last_name  = $request->last_name;
@@ -67,6 +71,7 @@ class ReservationController extends Controller
             $reservation->phone      = $request->phone;
             $reservation->date_start = $request->date_in;
             $reservation->date_end   = $request->date_off;
+            $reservation->price_for_reservation = $price;
             $reservation->confirm_code = time();
             $reservation->save();
 

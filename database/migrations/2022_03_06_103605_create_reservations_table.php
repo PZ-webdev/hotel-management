@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('phone');
             $table->date('date_start');
             $table->date('date_end');
+            $table->double('price_for_reservation')->default(0);
             $table->integer('confirm_code');
             $table->timestamp('verified_at')->nullable();
             $table->softDeletes();
