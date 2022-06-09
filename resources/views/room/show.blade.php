@@ -78,7 +78,7 @@
                                             <div class="form-group">
                                                 <input type="text" name="first_name" value="{{ old('first_name') }}"
                                                     class="form-control @error('first_name') is-invalid @enderror"
-                                                    placeholder="Imię">
+                                                    placeholder="Imię" required>
                                                 @error('first_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -90,7 +90,7 @@
                                             <div class="form-group">
                                                 <input type="text" name="last_name" value="{{ old('last_name') }}"
                                                     class="form-control @error('last_name') is-invalid @enderror"
-                                                    placeholder="Nazwisko">
+                                                    placeholder="Nazwisko" required>
                                                 @error('last_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -102,7 +102,7 @@
                                             <div class="form-group">
                                                 <input type="email" name="email" value="{{ old('email') }}"
                                                     class="form-control @error('email') is-invalid @enderror"
-                                                    placeholder="E-mail">
+                                                    placeholder="E-mail" required>
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -114,7 +114,7 @@
                                             <div class="form-group">
                                                 <input type="text" name="address" value="{{ old('address') }}"
                                                     class="form-control @error('address') is-invalid @enderror"
-                                                    placeholder="Adres">
+                                                    placeholder="Adres" required>
                                                 @error('address')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -126,7 +126,7 @@
                                             <div class="form-group">
                                                 <input type="text" name="city" value="{{ old('city') }}"
                                                     class="form-control @error('city') is-invalid @enderror"
-                                                    placeholder="Miasto">
+                                                    placeholder="Miasto" required>
                                                 @error('city')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -138,7 +138,7 @@
                                             <div class="form-group">
                                                 <input type="phone" name="phone" value="{{ old('phone') }}"
                                                     class="form-control @error('phone') is-invalid @enderror"
-                                                    placeholder="Telefon">
+                                                    placeholder="Telefon" required>
                                                 @error('phone')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -150,7 +150,7 @@
                                             <div class="form-group">
                                                 <input type="date" name="date_in" id="" value="{{ old('date_in') }}"
                                                     class="form-control @error('date_in') is-invalid @enderror"
-                                                    placeholder="Data przybycia">
+                                                    placeholder="Data przybycia" required>
                                                 @error('date_in')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -162,7 +162,7 @@
                                             <div class="form-group">
                                                 <input type="date" name="date_off" id="" value="{{ old('date_off') }}"
                                                     class="form-control @error('date_off') is-invalid @enderror"
-                                                    placeholder="Data wymeldowania">
+                                                    placeholder="Data wymeldowania" required>
                                                 @error('date_off')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

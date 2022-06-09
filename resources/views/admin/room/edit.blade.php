@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="form-group mb-4">
                                     <label class="col-md-12 p-0">Typ Pokoju</label>
                                     <div class="col-md-12 border-bottom p-0">
@@ -53,28 +53,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="form-group mb-4">
                                     <label class="col-md-12 p-0">Cena Pokoju</label>
                                     <div class="col-md-12 border-bottom p-0">
                                         <input type="number" value="{{ $room->room_fee }}" placeholder="Cena Pokoju"
                                             class="form-control p-0 border-0">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group mb-4">
-                                    <label class="col-md-12 p-0">Wynajęty</label>
-                                <div class="col-md-12 border-bottom p-0">
-                                    <select name="room_type" class="form-control p-0 border-0" id="">
-                                            <option value="0" {{ $room->is_empty == 0 ? 'selected' : '' }}>
-                                               Nie
-                                            </option>
-                                            <option value="1" {{ $room->is_empty == 1 ? 'selected' : '' }}>
-                                                Tak
-                                             </option>
-                                    </select>
-                                </div>
                                 </div>
                             </div>
                         </div>

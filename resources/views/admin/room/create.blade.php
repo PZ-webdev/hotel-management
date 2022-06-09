@@ -55,7 +55,7 @@
                                     <label class="col-md-12 p-0">Typ Pokoju</label>
                                     <div class="col-md-12 border-bottom p-0">
                                         <select name="room_type"
-                                            class="form-control p-0 border-0 @error('room_type') is-invalid @enderror"
+                                            class="form-control form-select p-0 border-0 @error('room_type') is-invalid @enderror"
                                             id="">
                                             @foreach ($types as $type)
                                                 <option value="{{ $type->id }}">
