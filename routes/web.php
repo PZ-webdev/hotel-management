@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::resource('home', HomeController::class)->only('index', 'update');
 
 Route::resource('room', RoomController::class)->scoped(['room' => 'slug'])->only('index', 'show');
 

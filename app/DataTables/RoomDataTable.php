@@ -18,7 +18,6 @@ class RoomDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('is_empty', fn ($model) => ($model->is_empty) ? 'Tak' : 'Nie')
             ->addColumn('created_at', function ($model) {
                 return $model->created_at->diffForHumans();
             })
@@ -36,7 +35,7 @@ class RoomDataTable extends DataTable
      */
     public function query(Room $model)
     {
-        return Room::select('id', 'name', 'is_empty', 'room_fee', 'image', 'created_at')
+        return Room::select('id', 'name', 'room_fee', 'image', 'created_at')
             ->newQuery();
     }
 
@@ -66,7 +65,6 @@ class RoomDataTable extends DataTable
         return [
             Column::make('id')->title('ID'),
             Column::make('name')->title('Nazwa'),
-            Column::make('is_empty')->title('Zajęty'),
             Column::make('room_fee')->title('Cena'),
             Column::make('created_at')->title('Dodano'),
             Column::computed('action')

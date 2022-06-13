@@ -14,5 +14,5 @@ return [
     'error' => 'Wystąpił błąd',
     'errorURL' => 'Niepoprawny odnośnik potwierdzający rezerwację.',
     'information' => 'Informacja',
-
+    'successUpdateProfil' => 'Twoje dane zostały zapisane',
 ]; 
