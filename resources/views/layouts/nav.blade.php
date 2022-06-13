@@ -9,9 +9,7 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a href="/" class="nav-link">Start</a></li>
-                <li class="nav-item"><a href="/hotel" class="nav-link">Hotel</a></li>
                 <li class="nav-item"><a href="/room" class="nav-link">Pokoje</a></li>
-                <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="/contact" class="nav-link">Kontakt</a></li>
                 @if (Auth::check())
                     <li class="nav-item dropdown">

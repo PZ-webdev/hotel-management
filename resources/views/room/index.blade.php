@@ -91,7 +91,7 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="row">
-                        @foreach ($rooms as $room)
+                        @forelse ($rooms as $room)
                             <div class="col-md-4 ftco-animate">
                                 <div class="destination">
                                     <a href="{{ route('room.show', $room->slug) }}"
@@ -134,7 +134,11 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="col-md-12">
+                                <h3 class="text-center">Brak wyników wyszukiwania.</h3>
+                            </div>
+                        @endforelse
                     </div>
                     <div class="row mt-5">
                         {{ $rooms->appends(request()->input())->links('room._paginate') }}

@@ -6,7 +6,7 @@
                 <h4 class="page-title">
                     <a href="{{ route('admin.reservation.index') }}">
                         <i class="fas fa-arrow-alt-circle-left" aria-hidden="true"></i> </a>
-                    Szczegóły Rezerwacji
+                    Szczegóły Pokoju
                 </h4>
             </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="white-box">
-                    <h3>ID Rezerwacji: {{ $room->id }} </h3>
+                    <h3>ID Pokoju: {{ $room->id }} </h3>
                     <table class="table table-bordered">
                         <thead>
                             <tr>

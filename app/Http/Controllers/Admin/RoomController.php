@@ -42,6 +42,8 @@ class RoomController extends Controller
      */
     public function store(RoomStoreRequest $request)
     {
+        RoomType::findOrFail($request->room_type);
+
         $path = $request->image->store('images/rooms');
      
         $room = new Room($request->validated());

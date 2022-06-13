@@ -21,6 +21,7 @@ class Reservation extends Model
         'date_start',
         'date_end',
         'confirm_code',
+        'price_for_reservation',
         'verified_at'
     ];
 

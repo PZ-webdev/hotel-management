@@ -35,19 +35,9 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                    {{ old('remember') ? 'checked' : '' }}>
-
-                                <label class="form-check-label" for="remember">
-                                    Pamiętaj mnie
-                                </label>
-                            </div>
-                            @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Zapomniałeś hasła ?
-                                </a>
-                            @endif
+                            <a class="btn btn-link" href="{{ route('register') }}">
+                                Nie masz konta ?
+                            </a>
                         </div>
 
                         <div class="form-group">

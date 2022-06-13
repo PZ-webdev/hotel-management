@@ -43,19 +43,16 @@ class ReservationController extends Controller
      */
     public function store(ReservationRequest $request)
     {
-        $room = Room::find($request->id_room);
-        if ($room == null) {
-            alert()->error(__('custom.oops'), __('custom.roomNotFound'));
-            return back();
-        }
-
+        $room = Room::findOrFail($request->id_room);
+        
         $checkRoom = Reservation::where('id_room', $request->id_room)
             ->where('date_end', '>', $request->date_in)
-            ->orderBy('date_end', 'desc')
             ->first();
 
-        if (!empty($checkRoom) > 0) {
+
+        if (!empty($checkRoom)) {
             alert()->error(__('custom.oops'), __('custom.roomIsReservated')  . $checkRoom->date_end);
+            return redirect()->back();
         } else {
             $reservation = new Reservation();
             
@@ -75,11 +72,13 @@ class ReservationController extends Controller
             $reservation->confirm_code = time();
             $reservation->save();
 
-            //TODO: change to email on email->request;
-            Mail::to('patryk.zaprzala@gmail.com')->send(new ConfirmReservation($reservation));
+            //TODO:
+            // Mail::to($request->email)->send(new ConfirmReservation($reservation));
             alert()->success(__('custom.success'),  __('custom.confirmSendEmail'));
+            
+
+        return redirect()->back();
         }
-        return back();
     }
 
     /**
