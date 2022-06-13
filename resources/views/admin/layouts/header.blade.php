@@ -15,6 +15,16 @@
         <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
             <ul class="navbar-nav ms-auto d-flex align-items-center">
                 <li>
+                    <a class="link-white" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                        Wyloguj się
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
+                <li>
                     <a class="profile-pic" href="#">
                         <img src="{{ asset('admin_panel/plugins/images/users/varun.jpg') }}" alt="user-img" width="36"
                             class="img-circle">

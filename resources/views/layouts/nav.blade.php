@@ -22,7 +22,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbar">
                             <a class="dropdown-item" href="#"><strong>{{ Auth::user()->name() }}</strong></a>
                             <a class="dropdown-item" href="{{ route('home') }}">Rezerwacje</a>
-                            <a class="dropdown-item" href="#">Profil</a>
+                            <a class="dropdown-item" href="{{ route('home.index') }}">Profil</a>
                             @hasrole('Admin')
                                 <a class="dropdown-item" href="{{ route('admin.index') }}">Panel Administratora</a>
                             @endhasrole

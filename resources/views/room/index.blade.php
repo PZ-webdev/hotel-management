@@ -127,8 +127,7 @@
                                         <hr>
                                         <p class="bottom-area d-flex">
                                             <span><i class="icon-map-o"></i> Miami, Fl</span>
-                                            <span class="ml-auto"><a href="{{ route('room.show', $room->slug) }}"
-                                                    class="{{ $room->is_empty ? 'bg-danger' : '' }}">
+                                            <span class="ml-auto"><a href="{{ route('room.show', $room->slug) }}">
                                                     Rezerwuj
                                                 </a></span>
                                         </p>
@@ -138,7 +137,7 @@
                         @endforeach
                     </div>
                     <div class="row mt-5">
-                        {{$rooms->appends(request()->input())->links('room._paginate')}}
+                        {{ $rooms->appends(request()->input())->links('room._paginate') }}
                     </div>
                 </div>
             </div>
